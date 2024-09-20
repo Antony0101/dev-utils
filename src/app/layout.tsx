@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import TopBarComponent from "@/components/layout/topBar";
-import SideBarComponent from "@/components/layout/sideBar";
+import { SideBarComponent } from "@/components/layout/sideBar";
 import RightSideBarComponent from "@/components/layout/rightSideBar";
+import { WindowDimenstionContextProvider } from "@/lib/contexts/windowDimensionContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,16 +21,18 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <TopBarComponent />
-                <div className="flex">
-                    <div className="flex-[2]">
-                        <SideBarComponent />
+                <WindowDimenstionContextProvider>
+                    <TopBarComponent />
+                    <div className="flex">
+                        <div className="flex-[2]">
+                            <SideBarComponent />
+                        </div>
+                        <div className="flex-[12]">{children}</div>
+                        <div className="flex-[3]">
+                            <RightSideBarComponent />
+                        </div>
                     </div>
-                    <div className="flex-[12]">{children}</div>
-                    <div className="flex-[3]">
-                        <RightSideBarComponent />
-                    </div>
-                </div>
+                </WindowDimenstionContextProvider>
             </body>
         </html>
     );
