@@ -25,7 +25,7 @@ export default function RootLayout({
                     <TopBarComponent />
                     <div className="flex w-full">
                         <SideBarComponent />
-                        <div className="max-w-[100%] md:max-w-[70%] w-full h-[80vh] sm:h-[90vh]">
+                        <div className="max-w-[100%] md:max-w-[70%] w-full h-[80vh] sm:h-[90vh] border border-gray-800">
                             {children}
                         </div>
                         <RightSideBarComponent />
