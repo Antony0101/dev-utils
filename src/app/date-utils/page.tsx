@@ -1,10 +1,16 @@
 "use client";
 
 import Typography from "@/components/ui/typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import moment from "moment";
+import momentTimezone from "moment-timezone";
 
 export default function DateUtilsPage() {
-    const [curDate, setCurDate] = useState(new Date());
+    const [curDate, setCurDate] = useState<Date | undefined>(undefined);
+    useEffect(() => {
+        setCurDate(new Date());
+    }, []);
+    console.log(momentTimezone.tz.names());
     return (
         <main className="p-4 w-full h-full">
             <Typography variant="h1">Date and Time Utils</Typography>
@@ -16,7 +22,12 @@ export default function DateUtilsPage() {
                 This section displays the current date and time.
             </Typography>
             <div>
-                <div>{curDate.toISOString()}</div>
+                <Typography variant="p">ISO String</Typography>
+                <div>{curDate?.toISOString() || ""}</div>
+                <Typography variant={"p"}>Locale String</Typography>
+                <div>{curDate?.toLocaleString() || ""}</div>
+                <Typography variant={"p"}>Milliseconds</Typography>
+                <div>{curDate?.getTime() || ""}</div>
             </div>
         </main>
     );
